@@ -29,12 +29,18 @@ export class ViewDocumentation implements Route {
             <div id="centered" class="red">${data.title}</div>
             <div style="font-family: monospace; font-size: 20px; color: rgb(224, 209, 170);">
             ${readFileSync(path.resolve(__dirname, '..') + '/public/docs/markdown/'+data.index, 'utf-8')}
-            <div class="green" style="">${data.last_updated}</div>
             </div>
+            <div class="green">${data.last_updated}</div>
     </div>
 </body>
-<link rel="stylesheet" href="css/index.css"></link>`
+<script>
+const title = document.getElementById("_title");
+title.onclick = function() { window.location.href = "http://docs.mybutton.org/"; };
+</script>
+<link rel="stylesheet" href="../css/index.css"></link>`
             return res.status(200).send(response_html);
         }
     }
 }
+
+export default new ViewDocumentation();

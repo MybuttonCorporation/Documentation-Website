@@ -55,6 +55,8 @@ body {
 
 .green {
     color:rgb(184, 187, 38);
+    font-size: 25px;
+    font-family: monospace;
 }
 
 .white {
