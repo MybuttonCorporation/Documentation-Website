@@ -17,6 +17,7 @@ export class Documentation implements Route {
             files.forEach(file => {
                 const data1 = JSON.parse(readFileSync(path.resolve(__dirname, '..')+'/public/docs/'+file.name, {encoding: 'utf-8'}));
                 let data = {
+                    name: file.name,
                     title: data1.title,
                     last_updated: data1.last_updated,
                     desc: data1.desc,
@@ -31,6 +32,7 @@ export class Documentation implements Route {
             let data = JSON.parse(readFileSync(path.resolve(__dirname, '..')+'/public/docs/'+document_id+'.json', {encoding: 'utf-8'}));
             return res.status(200).send({
                 title: data.title,
+                name: document_id,
                 last_updated: data.last_updated,
                 desc: data.desc,
                 index: readFileSync(path.resolve(__dirname, '..') + '/public/docs/markdown/' + data.index, 'utf-8')

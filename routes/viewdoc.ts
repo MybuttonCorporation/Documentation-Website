@@ -13,8 +13,8 @@ export class ViewDocumentation implements Route {
     type: RouteType = "get"; path: string = "/docs/:id";
     method(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>) {
         let document_id = req.params.id;
-        if (!document_id) return res.status(201).send('No such documentation');
-        else if (!existsSync(path.resolve(__dirname, '..')+'/public/docs/'+document_id+'.json')) return res.status(201).send('No such documentation');
+        if (!document_id) return res.redirect('/doc/'+req.params.id);
+        else if (!existsSync(path.resolve(__dirname, '..')+'/public/docs/'+document_id+'.json')) res.redirect('/doc/'+req.params.id);
         else {
             let data = JSON.parse(readFileSync(path.resolve(__dirname, '..')+'/public/docs/'+document_id+'.json', {encoding: 'utf-8'}));
             let response_html = `<!DOCTYPE html>

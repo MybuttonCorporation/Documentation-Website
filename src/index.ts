@@ -31,3 +31,29 @@ app.listen(port).on('request', (req) => {
     console.log(chalk.bold(orange(req.method)) + chalk.bold.white(' at', chalk.bold.yellow(req.url), 'by', chalk.bold.blue(req.socket.remoteAddress)));
     
 });
+
+setTimeout(() => {
+    app.get('*', function(req, res){
+        res.send(`<!DOCTYPE html>
+            <title>Mybutton Documentation Server</title>
+            <body>
+                <div id="_titlebar"></div>
+                <div id="_title">
+                    Mybutton Documentation Server
+                </div>
+                <div id="_titlebar"></div>
+                <div id="container">
+                        <div id="centered" class="red" style="font-size: 40px;">404 Not Found</div>
+                        <div style="text-align: center; font-family: monospace; font-size: 20px; color: rgb(224, 209, 170);">
+                        No page was found under ${req.url}.
+                        </div>
+                </div>
+            </body>
+            <script>
+            const title = document.getElementById("_title");
+            title.onclick = function() { window.location.href = "http://docs.mybutton.org/"; };
+            </script>
+            <link rel="stylesheet" href="../css/index.css"></link>`);
+            console.log(chalk.bold(orange(req.method), chalk.white('unknown_path at'), chalk.blue(req.originalUrl)))
+    });
+}, 1000);
